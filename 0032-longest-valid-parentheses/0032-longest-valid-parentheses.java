@@ -1,0 +1,27 @@
+import java.util.*;
+
+class Solution {
+    public int longestValidParentheses(String s) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        int maxLen = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                stack.push(i);
+            } else {
+                stack.pop();
+                if (stack.isEmpty()) {
+                    stack.push(i);
+                } else {
+                    maxLen = Math.max(maxLen, i - stack.peek());
+                }
+            }
+        }
+
+        return maxLen;
+    }
+}
+
+// 시간 복잡도 - O(n), n은 문자열 s의 길이
+// 공간 복잡도 - O(n)
